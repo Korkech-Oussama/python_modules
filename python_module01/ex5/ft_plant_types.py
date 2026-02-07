@@ -5,18 +5,19 @@ class Plant:
     Attributes:
         name (str): The name of the plant.
         height (int): The height in cm.
-        plant_age (int): The age in days.
+        age (int): The age in days.
     """
 
-    def __init__(self, name: str, height: int, plant_age: int) -> None:
+    def __init__(self, name: str, height: int, age: int) -> None:
         """Initializes the base plant attributes."""
         self.name = name
         self.height = height
-        self.plant_age = plant_age
+        self.age = age
 
     def __str__(self) -> str:
+        classname = self.__class__.__name__
         """Returns a formatted string representing the plant's basic info."""
-        return f"{self.name} ({self.__class__.__name__}): {self.height}cm, {self.plant_age} days"
+        return f"{self.name} ({classname}): {self.height}cm, {self.age} days"
 
 
 class Flower(Plant):
@@ -27,9 +28,9 @@ class Flower(Plant):
         color (str): The color of the flower petals.
     """
 
-    def __init__(self, name: str, height: int, plant_age: int, color: str) -> None:
+    def __init__(self, name: str, height: int, age: int, color: str) -> None:
         """Initializes flower and calls parent setup."""
-        super().__init__(name, height, plant_age)
+        super().__init__(name, height, age)
         self.color = color
 
     def bloom(self) -> None:
@@ -49,10 +50,11 @@ class Tree(Plant):
         trunk_diameter (int): The diameter of the tree trunk in cm.
     """
 
-    def __init__(self, name: str, height: int, plant_age: int, trunk_diameter: int) -> None:
+    def __init__(self, name: str, height: int,
+                 age: int, diameter: int) -> None:
         """Initializes tree and calls parent setup."""
-        super().__init__(name, height, plant_age)
-        self.trunk_diameter = trunk_diameter
+        super().__init__(name, height, age)
+        self.trunk_diameter = diameter
 
     def produce_shade(self, shade_area: int) -> None:
         """Prints the amount of shade provided."""
@@ -72,9 +74,10 @@ class Vegetable(Plant):
         nutritional_value (str): The main vitamin or nutrient content.
     """
 
-    def __init__(self, name: str, height: int, plant_age: int, harvest_season: str, nutritional_value: str) -> None:
+    def __init__(self, name: str, height: int, age: int,
+                 harvest_season: str, nutritional_value: str) -> None:
         """Initializes vegetable and calls parent setup."""
-        super().__init__(name, height, plant_age)
+        super().__init__(name, height, age)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
 
@@ -93,7 +96,7 @@ def main():
     # Creating 2 instances of Flower
     rose = Flower("Rose", 25, 30, "red")
     lily = Flower("Lily", 15, 12, "white")
-    
+
     print(rose)
     rose.bloom()
     print(lily)
