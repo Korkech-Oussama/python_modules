@@ -357,15 +357,15 @@ game_events = [
 
 
 def ft_data_stream() -> None:
-    start_time = time.time()
+    start_time: float = time.time()
 
     print("=== Game Data Stream Processor ===\n")
     print(f"Processing {len(game_events)} game events...\n")
 
-    event_count = 0
-    hight_level_players = 0
-    treasur_events = 0
-    lvl_up_event = 0
+    event_count: int = 0
+    hight_level_players: int = 0
+    treasur_events: int = 0
+    lvl_up_event: int = 0
 
     def get_events(events: list) -> Generator[dict, None, None]:
         for event in events:
@@ -384,7 +384,7 @@ def ft_data_stream() -> None:
         print(f"Event {event_count}: Player {event["player"]}" +
               f"(level {event["data"]["level"]}) {event["event_type"]}")
 
-    end_time = time.time()
+    end_time: float = time.time()
 
     print("\n=== Stream Analytics ===")
     print(f"Total events processed: {event_count}")
@@ -403,8 +403,8 @@ def ft_data_stream() -> None:
         while True:
             yield a
             a, b = b, a + b
-    fibonacci = fibb_gen()
-    fibb_list = [str(next(fibonacci)) for _ in range(10)]
+    fibonacci: Generator[int, None, None] = fibb_gen()
+    fibb_list: list[str] = [str(next(fibonacci)) for _ in range(10)]
     print(f"Fibonacci sequence (first 10):{", ".join(fibb_list)}")
 
     def is_prime(n: int) -> bool:
@@ -422,9 +422,9 @@ def ft_data_stream() -> None:
                 yield x
             x += 1
 
-    prim = prim_gen()
-    first_n = 7
-    prim_list = [str(next(prim)) for _ in range(first_n)]
+    prim: Generator[int, None, None] = prim_gen()
+    first_n: int = 7
+    prim_list: list[str] = [str(next(prim)) for _ in range(first_n)]
     print(f"Prime numbers (first {first_n}): {", ".join(prim_list)}")
 
 

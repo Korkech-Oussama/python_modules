@@ -1,3 +1,6 @@
+from typing import Any
+
+
 game_data = {
     "players": {
         "alice": {
@@ -272,17 +275,23 @@ game_data = {
     ],
 }
 
+
 def list_comprehension() -> None:
     print("=== List Comprehension Examples ===")
 
-    high_scorers: list[str]= [name for name, score in game_data["players"].items()
-    if score["total_score"] > 2000]
+    high_scorers: list[str] = [
+        name for name, score in game_data["players"].items()
+        if score["total_score"] > 2000
+    ]
 
-    score_doubled: list[str] = [info["total_score"] * 2 
-    for name, info in game_data["players"].items()]
+    score_doubled: list[int] = [
+        info["total_score"] * 2
+        for name, info in game_data["players"].items()
+    ]
 
-    active_players: list[str] = [value["player"] for value in game_data["sessions"]]
-    active_players: list[str] = list(set(active_players))
+    active_players: list[str] = [value["player"] for
+                                 value in game_data["sessions"]]
+    active_players = list(set(active_players))
 
     print(f"High scorers (>2000): {high_scorers}")
     print(f"Scores doubled: {score_doubled}")
@@ -291,28 +300,42 @@ def list_comprehension() -> None:
 
 def dict_comprehension() -> None:
     print("\n=== Dict Comprehension Examples ===")
-    scores = {key: value["total_score"] for key, value in game_data["players"].items()}
-    categories = ["high", "medium", "low"]
-    score_cat = {cat: len([
-        name for name , info in game_data["players"].items()
-        if(cat == "high" and info["total_score"] > 5000) or
-        (cat == "medium" and 2000 < info["total_score"] <= 5000) or
-        (cat == "low" and info["total_score"] <= 2000)
+
+    scores: dict[str, int] = {
+        key: value["total_score"]
+        for key, value in game_data["players"].items()
+    }
+
+    categories: list[str] = ["high", "medium", "low"]
+
+    score_cat: dict[str, int] = {
+        cat: len([
+            name for name, info in game_data["players"].items()
+            if (cat == "high" and info["total_score"] > 5000) or
+               (cat == "medium" and 2000 < info["total_score"] <= 5000) or
+               (cat == "low" and info["total_score"] <= 2000)
         ])
         for cat in categories
     }
-    achivements =  {name: info["achievements_count"] for name, info in game_data["players"].items()}
+
+    achievements: dict[str, int] = {
+        name: info["achievements_count"]
+        for name, info in game_data["players"].items()
+    }
 
     print(f"Player scores: {scores}")
     print(f"Score categories: {score_cat}")
-    print(f"Achievement counts: {achivements}")
+    print(f"Achievement counts: {achievements}")
+
 
 def set_comprehension() -> None:
     print("\n=== Set Comprehension Examples ===")
-    
-    unique_players = {session["player"] for session in game_data["sessions"]}
-    unique_achievements = {ach for ach in game_data["achievements"]}
-    active_modes = {session["mode"] for session in game_data["sessions"]}
+
+    unique_players: set[str] = {session["player"] for
+                                session in game_data["sessions"]}
+    unique_achievements: set[str] = {ach for ach in game_data["achievements"]}
+    active_modes: set[str] = {session["mode"] for
+                              session in game_data["sessions"]}
 
     print(f"Unique players: {unique_players}")
     print(f"Unique achievements: {unique_achievements}")
@@ -321,31 +344,31 @@ def set_comprehension() -> None:
 
 def combined_analysis() -> None:
     print("\n=== Combined Analysis ===")
-    
-    total_players = len(game_data["players"])
-    
-    unique_ach_set = {ach for ach in game_data["achievements"]}
-    total_unique_ach = len(unique_ach_set)
-    
-    # 3. Average Score
-    all_scores = [info["total_score"] for info in game_data["players"].values()]
-    avg_score = sum(all_scores) / total_players
 
-    # 4. Top Performer (The "No-Lambda" Way)
-    highest_score = max(all_scores)
-    
-    top_names = [
-        name for name, info in game_data["players"].items() 
+    total_players: int = len(game_data["players"])
+
+    unique_ach_set: set[str] = {ach for ach in game_data["achievements"]}
+    total_unique_ach: int = len(unique_ach_set)
+
+    all_scores: list[int] = [info["total_score"] for
+                             info in game_data["players"].values()]
+    avg_score: float = sum(all_scores) / total_players
+
+    highest_score: int = max(all_scores)
+
+    top_names: list[str] = [
+        name for name, info in game_data["players"].items()
         if info["total_score"] == highest_score
     ]
-    
-    top_name = top_names[0]
-    top_info = game_data["players"][top_name]
+
+    top_name: str = top_names[0]
+    top_info: dict[str, Any] = game_data["players"][top_name]
 
     print(f"Total players: {total_players}")
     print(f"Total unique achievements: {total_unique_ach}")
     print(f"Average score: {avg_score:.1f}")
-    print(f"Top performer: {top_name} ({highest_score} points, {top_info['achievements_count']} achievements)")
+    print(f"Top performer: {top_name} ({highest_score} points, " +
+          f"{top_info['achievements_count']} achievements)")
 
 
 if __name__ == "__main__":
