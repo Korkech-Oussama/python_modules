@@ -13,25 +13,26 @@ class DataProcessor(ABC):
         pass
 
     # Injected Optional and Dict into the base method signature
-    def format_output(self, result: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    def format_output(self, result: str,
+                      metadata: Optional[Dict[str, Any]] = None) -> str:
         return result
 
 
 class NumericProcessor(DataProcessor):
 
-    # Injected List and Union to explicitly type the expected data
     def process(self, data: List[Union[int, float]]) -> str:
         try:
             print(f"Processing data: {data}")
-            sum_val = 0  # Renamed from 'sum' to avoid shadowing built-in function
+            s = 0
             i = 0
             for item in data:
                 i += 1
-                sum_val += int(item)
+                s += int(item)
+            avg = s / len(data)
         except Exception as e:
             return f"Error: {e}"
         else:
-            return f"Output: Processed {i} numeric values, sum={sum_val}, avg={sum_val / len(data)}"
+            return f"Output: Processed {i} numeric values, sum={s}, avg={avg}"
 
     def validate(self, data: Any) -> bool:
         if type(data) is not list:
@@ -43,25 +44,26 @@ class NumericProcessor(DataProcessor):
         return True
 
     # Added type hints to match the parent's new signature
-    def format_output(self, result: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    def format_output(self, result: str,
+                      metadata: Optional[Dict[str, Any]] = None) -> str:
         return super().format_output(result, metadata)
 
 
 class TextProcessor(DataProcessor):
-    
+
     def process(self, data: str) -> str:
         try:
             print(f"Processing data: {data}")
-            char_count = 0
-            word_count = 1
+            char_c = 0
+            word_c = 1
             for item in data:
                 if item == ' ':
-                    word_count += 1
-                char_count += 1
+                    word_c += 1
+                char_c += 1
         except Exception as e:
             return f"Error: {e}"
         else:
-            return f"Output: Processed text:{char_count} characters, {word_count} words"
+            return f"Output:Processed text:{char_c} characters, {word_c} words"
 
     def validate(self, data: Any) -> bool:
         if type(data) is not str:
@@ -69,7 +71,8 @@ class TextProcessor(DataProcessor):
         print("Validation: Text data verified")
         return True
 
-    def format_output(self, result: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    def format_output(self, result: str,
+                      metadata: Optional[Dict[str, Any]] = None) -> str:
         return super().format_output(result, metadata)
 
 
@@ -92,7 +95,8 @@ class LogProcessor(DataProcessor):
         print("Validation: Log entry verified")
         return True
 
-    def format_output(self, result: str, metadata: Optional[Dict[str, Any]] = None) -> str:
+    def format_output(self, result: str,
+                      metadata: Optional[Dict[str, Any]] = None) -> str:
         return result
 
 
