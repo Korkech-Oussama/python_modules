@@ -1,21 +1,37 @@
 def test_validation() -> None:
-    from alchemy.grimoire.validator import validate_ingredients
-    print(f"validate_ingredients(\"fire air\"):" +
-          f"{validate_ingredients("fire air")}")
-    print(f"validate_ingredients(\"dragon scales\"):" +
-          f"{validate_ingredients("dragon scales")}")
+    try:
+        print("Testing ingredient validation:")
+        from alchemy.grimoire.validator import validate_ingredients
+        print("validate_ingredients(\"fire air\"):" +
+              f"{validate_ingredients("fire air")}")
+        print("validate_ingredients(\"dragon scales\"):" +
+              f"{validate_ingredients("dragon scales")}")
+    except Exception as e:
+        print(e)
 
 
 def test_spell() -> None:
-    from alchemy.grimoire.spellbook import record_spell
-    print("\nTesting spell recording with validation:")
-    print(f"record_spell(\"Fireball\", \"fire air\"): {record_spell("Fireball", "fire air")}")
-    print(f"record_spell(\"Dark Magic\", \"shadow\"): {record_spell("Dark Magic", "shadow")}")
+    try:
+
+        from alchemy.grimoire.spellbook import record_spell
+        print("\nTesting spell recording with validation:")
+        print("record_spell(\"Fireball\", \"fire air\"): " +
+              f"{record_spell("Fireball", "fire air")}")
+        print("record_spell(\"Dark Magic\", \"shadow\"): " +
+              f"{record_spell("Dark Magic", "shadow")}")
+    except Exception as e:
+        print(e)
+
 
 def late_import() -> None:
-    print("\nTesting late import technique:")
-    from alchemy.grimoire.spellbook import record_spell
-    print(f"record_spell(\"Lightning\", \"air\"): {record_spell("Lightning", "air")}")
+    try:
+        print("\nTesting late import technique:")
+        from alchemy.grimoire.spellbook import record_spell
+        print("record_spell(\"Lightning\", \"air\"): " +
+              f"{record_spell("Lightning", "air")}")
+    except Exception as e:
+        print(e)
+
 
 if __name__ == "__main__":
     print("\n=== Circular Curse Breaking ===\n")

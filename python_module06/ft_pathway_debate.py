@@ -1,6 +1,3 @@
-import alchemy.transmutation
-
-
 def absolute_imports() -> None:
     print("Testing Absolute Imports (from basic.py):")
     try:
@@ -14,19 +11,20 @@ def absolute_imports() -> None:
 def relative_import() -> None:
     print("\nTesting Relative Imports (from advanced.py):")
     try:
-        from alchemy.transmutation.advanced import philosophers_stone, elixir_of_life
+        from alchemy.transmutation.advanced import philosophers_stone, elixir_of_life  # noqa : F401
         print(f"philosophers_stone(): {philosophers_stone()}")
         print(f"elixir_of_life(): {elixir_of_life()}")
     except Exception as e:
         print(e)
 
+
 def package_access() -> None:
     print("\nTesting Package Access:")
     try:
         import alchemy
-        print("alchemy.transmutation.lead_to_gold():" + 
+        print("alchemy.transmutation.lead_to_gold():" +
               f"{alchemy.transmutation.lead_to_gold()}")
-        print("alchemy.transmutation.philosophers_stone():" + 
+        print("alchemy.transmutation.philosophers_stone():" +
               f"{alchemy.transmutation.philosophers_stone()}")
     except Exception as e:
         print(e)
